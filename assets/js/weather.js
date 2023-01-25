@@ -1,17 +1,79 @@
-console.log("All set up");
+var APIKey = "325f3ba35b474abcba3d8b91c091c747";
 
-const APIKey = "325f3ba35b474abcba3d8b91c091c747";
-let city = "atlanta"
-let queryUrl =
-  "http://api.openweathermap.org/data/2.5/forecast?q=" +
-  city +
-  "&appid=" +
-  APIKey;
+var searchForm = document.getElementById("search-form");
+var input = document.getElementById("citySearch");
 
-fetch(queryUrl)
-  .then(function (response) {
-    return response.json();
-  })
-  .then(function (data) {
-    console.log(data.city.coord);
-  });
+function getUserInput(e) {
+  e.preventDefault();
+
+  var userInput = input.value;
+
+  getCurrentWeather(userInput);
+  getFiveDay(userInput);
+}
+
+function getCurrentWeather(city) {
+  let queryUrl =
+    "http://api.openweathermap.org/data/2.5/weather?q=" +
+    city +
+    "&units=imperial&appid=" +
+    APIKey;
+
+  fetch(queryUrl)
+    .then(function (response) {
+      return response.json();
+    })
+    .then(function (data) {
+      console.log(data);
+      var event = new Date();
+      var options = {
+        weekday: "long",
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+      };
+
+      var formatted = event.toLocaleDateString(undefined, options);
+
+      console.log(formatted);
+      // Expected output (varies according to local timezone and default locale): Thursday, December 20, 2012
+    });
+}
+
+function getFiveDay(city) {
+  let queryUrl =
+    "http://api.openweathermap.org/data/2.5/forecast?q=" +
+    city +
+    "&units=imperial&appid=" +
+    APIKey;
+
+  fetch(queryUrl)
+    .then(function (response) {
+      return response.json();
+    })
+    .then(function (data) {
+      console.log(data);
+      var arr = [
+        data.list[0],
+        data.list[1],
+        data.list[2],
+        data.list[3],
+        data.list[4],
+      ];
+      console.log(arr);
+      // var event = new Date();
+      // var options = {
+      //   weekday: "long",
+      //   year: "numeric",
+      //   month: "long",
+      //   day: "numeric",
+      // };
+
+      // var formatted = event.toLocaleDateString(undefined, options);
+
+      // console.log(formatted);
+      // Expected output (varies according to local timezone and default locale): Thursday, December 20, 2012
+    });
+}
+
+searchForm.addEventListener("submit", getUserInput);
