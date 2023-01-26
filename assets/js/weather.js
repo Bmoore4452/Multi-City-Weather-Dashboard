@@ -1,4 +1,5 @@
 var APIKey = "325f3ba35b474abcba3d8b91c091c747";
+var cities = JSON.parse(localStorage.getItem("cities")) || [];
 
 var searchForm = document.getElementById("search-form");
 var input = document.getElementById("citySearch");
@@ -9,9 +10,14 @@ function getUserInput(e) {
   e.preventDefault();
 
   var userInput = input.value;
+  runWeather(userInput);
 
-  getCurrentWeather(userInput);
-  getFiveDay(userInput);
+  input.value = "";
+}
+
+function runWeather(city) {
+  getCurrentWeather(city);
+  getFiveDay(city);
 }
 
 function getCurrentWeather(city) {
@@ -50,7 +56,7 @@ function getCurrentWeather(city) {
       `;
       console.log(icon);
       currentWeather.append(banner);
-
+      saveCity(data.name);
       console.log(formatted);
       // Expected output (varies according to local timezone and default locale): Thursday, December 20, 2012
     });
@@ -102,6 +108,17 @@ function getFiveDay(city) {
         fiveDay.append(card);
       });
     });
+}
+
+function saveCity(city) {
+  if (city === "") {
+    return null;
+  }
+  if (cities.indexOf(city) !== -1) {
+    return;
+  }
+  cities.push(city);
+  localStorage.setItem("cities", JSON.stringify(cities));
 }
 
 searchForm.addEventListener("submit", getUserInput);
