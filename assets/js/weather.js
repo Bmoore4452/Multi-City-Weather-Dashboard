@@ -3,6 +3,7 @@ var APIKey = "325f3ba35b474abcba3d8b91c091c747";
 var searchForm = document.getElementById("search-form");
 var input = document.getElementById("citySearch");
 var fiveDay = document.getElementById("fiveDay");
+var currentWeather = document.getElementById("currentWeather");
 
 function getUserInput(e) {
   e.preventDefault();
@@ -33,8 +34,22 @@ function getCurrentWeather(city) {
         month: "long",
         day: "numeric",
       };
+      currentWeather.innerHTML = "";
 
       var formatted = event.toLocaleDateString(undefined, options);
+      var icon = data.weather[0].icon;
+      var banner = document.createElement("div");
+      var iconUrl = "http://openweathermap.org/img/wn/" + icon + "@2x.png";
+      banner.setAttribute("id", "banner");
+      banner.innerHTML = `
+                          <div>${formatted}</div>
+                          <img src="${iconUrl}" alt="">
+                          <div>${data.main.temp + " °F"}</div>
+                          <div>${data.wind.speed + " MPH"}</div>
+                          <div>${data.main.humidity + " %"}</div>
+      `;
+      console.log(icon);
+      currentWeather.append(banner);
 
       console.log(formatted);
       // Expected output (varies according to local timezone and default locale): Thursday, December 20, 2012
@@ -75,7 +90,6 @@ function getFiveDay(city) {
         var iconUrl = "http://openweathermap.org/img/wn/" + icon + "@2x.png";
         var card = document.createElement("div");
         card.setAttribute("id", "card");
-       
 
         card.innerHTML = `
                           <div>${date}</div>
@@ -87,19 +101,6 @@ function getFiveDay(city) {
         `;
         fiveDay.append(card);
       });
-
-      // var event = new Date();
-      // var options = {
-      //   weekday: "long",
-      //   year: "numeric",
-      //   month: "long",
-      //   day: "numeric",
-      // };
-
-      // var formatted = event.toLocaleDateString(undefined, options);
-
-      // console.log(formatted);
-      // Expected output (varies according to local timezone and default locale): Thursday, December 20, 2012
     });
 }
 
