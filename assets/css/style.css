@@ -19,9 +19,9 @@ h1 {
   left: 45%;
 }
 
-h2{
-    margin: auto;
-    text-align: center;
+h2 {
+  margin: auto;
+  text-align: center;
 }
 
 .content-area {
@@ -39,43 +39,55 @@ h2{
   margin: 10px 0;
 }
 
-.search_results{
-  border: solid red;
+.search_results {
+  /* border: solid red; */
   margin: 10px auto;
   width: 70%;
-  height: auto;
 }
 
-#currentWeather{
+#currentWeather {
   width: 100%;
-  border: solid;
-  height: 150px;
+  /* border: solid; */
+  height: auto;
   margin: auto;
+  display: flex;
 }
 
-#fiveDay{
+#banner{
+  width: auto;
+  /* border: solid; */
+  background-color: #241773;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: auto;
+  font-size: min(max(2vw), 4vw);
+}
+
+#fiveDay {
   display: flex;
   width: 100%;
-  border: solid;
-  height: 150px;
+  /* border: solid; */
+  height: auto;
   margin: 10px auto;
 }
 
-#card{
-  border: solid;
+#card {
+  /* border: solid; */
   width: 50%;
   text-align: center;
   margin: 10px;
-  background-color: #9E7C0C;
+  background-color: #241773;
   color: white;
-  font-size: 1.7vw;
+  font-size: min(max(1.7vw), 1vw);
+  /* height: auto; */
 }
 
-#citySearch{
+#citySearch {
   width: 100%;
-  
 }
 
-#card img{
+#card img {
   width: 50%;
 }
