@@ -54,13 +54,20 @@ function getFiveDay(city) {
     .then(function (data) {
       console.log(data);
       var arr = [
-        data.list[0],
-        data.list[1],
-        data.list[2],
-        data.list[3],
         data.list[4],
+        data.list[12],
+        data.list[20],
+        data.list[28],
+        data.list[36],
       ];
       console.log(arr);
+
+      arr.forEach((element) => {
+        console.log(element.main.temp + " °F");
+        console.log(element.wind.speed+ " MPH");
+        console.log(element.main.humidity + " %");
+      });
+
       // var event = new Date();
       // var options = {
       //   weekday: "long",
