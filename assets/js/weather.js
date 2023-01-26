@@ -16,7 +16,7 @@ function getUserInput(e) {
 
 function getCurrentWeather(city) {
   let queryUrl =
-    "http://api.openweathermap.org/data/2.5/weather?q=" +
+    "https://api.openweathermap.org/data/2.5/weather?q=" +
     city +
     "&units=imperial&appid=" +
     APIKey;
@@ -39,7 +39,7 @@ function getCurrentWeather(city) {
       var formatted = event.toLocaleDateString(undefined, options);
       var icon = data.weather[0].icon;
       var banner = document.createElement("div");
-      var iconUrl = "http://openweathermap.org/img/wn/" + icon + "@2x.png";
+      var iconUrl = "https://openweathermap.org/img/wn/" + icon + "@2x.png";
       banner.setAttribute("id", "banner");
       banner.innerHTML = `
                           <div>${formatted}</div>
@@ -58,7 +58,7 @@ function getCurrentWeather(city) {
 
 function getFiveDay(city) {
   let queryUrl =
-    "http://api.openweathermap.org/data/2.5/forecast?q=" +
+    "https://api.openweathermap.org/data/2.5/forecast?q=" +
     city +
     "&units=imperial&appid=" +
     APIKey;
@@ -87,7 +87,7 @@ function getFiveDay(city) {
         var date = new Date(element.dt_txt).toLocaleDateString();
         console.log(date);
         var icon = element.weather[0].icon;
-        var iconUrl = "http://openweathermap.org/img/wn/" + icon + "@2x.png";
+        var iconUrl = "https://openweathermap.org/img/wn/" + icon + "@2x.png";
         var card = document.createElement("div");
         card.setAttribute("id", "card");
 
