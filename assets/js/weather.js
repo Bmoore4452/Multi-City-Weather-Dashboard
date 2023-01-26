@@ -2,6 +2,7 @@ var APIKey = "325f3ba35b474abcba3d8b91c091c747";
 
 var searchForm = document.getElementById("search-form");
 var input = document.getElementById("citySearch");
+var fiveDay = document.getElementById("fiveDay");
 
 function getUserInput(e) {
   e.preventDefault();
@@ -61,7 +62,7 @@ function getFiveDay(city) {
         data.list[36],
       ];
       console.log(arr);
-
+      fiveDay.innerHTML = "5-Day Forecast:";
       arr.forEach((element) => {
         console.log(element.main.temp + " °F");
         console.log(element.wind.speed + " MPH");
@@ -72,10 +73,10 @@ function getFiveDay(city) {
         console.log(date);
         var icon = element.weather[0].icon;
         var iconUrl = "http://openweathermap.org/img/wn/" + icon + "@2x.png";
-        var fiveDay = document.getElementById("fiveDay");
         var card = document.createElement("div");
         card.setAttribute("id", "card");
        
+
         card.innerHTML = `
                           <div>${date}</div>
                           <img src="${iconUrl}" alt="">
