@@ -64,8 +64,27 @@ function getFiveDay(city) {
 
       arr.forEach((element) => {
         console.log(element.main.temp + " °F");
-        console.log(element.wind.speed+ " MPH");
+        console.log(element.wind.speed + " MPH");
         console.log(element.main.humidity + " %");
+        console.log(element.weather[0].icon);
+
+        var date = new Date(element.dt_txt).toLocaleDateString();
+        console.log(date);
+        var icon = element.weather[0].icon;
+        var iconUrl = "http://openweathermap.org/img/wn/" + icon + "@2x.png";
+        var fiveDay = document.getElementById("fiveDay");
+        var card = document.createElement("div");
+        card.setAttribute("id", "card");
+       
+        card.innerHTML = `
+                          <div>${date}</div>
+                          <img src="${iconUrl}" alt="">
+                          <div>${element.main.temp + " °F"}</div>
+                          <div>${element.wind.speed + " MPH"}</div>
+                          <div>${element.main.humidity + " %"}</div>
+                          
+        `;
+        fiveDay.append(card);
       });
 
       // var event = new Date();
