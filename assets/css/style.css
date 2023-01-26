@@ -1,8 +1,9 @@
-.container {
-  border: solid;
+main {
+  /* border: solid; */
   width: 100%;
   height: 100%;
   margin: auto;
+  display: flex;
 }
 
 header {
@@ -38,19 +39,24 @@ h2{
   margin: 10px 0;
 }
 
-.current-weather {
+.search_results{
   border: solid red;
   margin: 10px auto;
   width: 70%;
+  height: auto;
+}
+
+#currentWeather{
+  width: 100%;
+  border: solid;
   height: 150px;
+  margin: auto;
 }
 
-.form-content{
-    display: flex;
-    flex-direction: column;
-    
+#fiveDay{
+  width: 100%;
+  border: solid;
+  height: 150px;
+  margin: 10px auto;
 }
 
-#search-btn{
-    margin: 10px 0;
-}
