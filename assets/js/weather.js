@@ -1,6 +1,6 @@
 var APIKey = "325f3ba35b474abcba3d8b91c091c747";
 var cities = JSON.parse(localStorage.getItem("cities")) || [];
-
+var searchHistory = document.getElementById("searchHistory");
 var searchForm = document.getElementById("search-form");
 var input = document.getElementById("citySearch");
 var fiveDay = document.getElementById("fiveDay");
@@ -11,7 +11,7 @@ function getUserInput(e) {
 
   var userInput = input.value;
   runWeather(userInput);
-
+  createBtn();
   input.value = "";
 }
 
@@ -32,7 +32,6 @@ function getCurrentWeather(city) {
       return response.json();
     })
     .then(function (data) {
-      console.log(data);
       var event = new Date();
       var options = {
         weekday: "long",
@@ -54,10 +53,10 @@ function getCurrentWeather(city) {
                           <div>${data.wind.speed + " MPH"}</div>
                           <div>${data.main.humidity + " %"}</div>
       `;
-      console.log(icon);
+
       currentWeather.append(banner);
       saveCity(data.name);
-      console.log(formatted);
+
       // Expected output (varies according to local timezone and default locale): Thursday, December 20, 2012
     });
 }
@@ -74,7 +73,6 @@ function getFiveDay(city) {
       return response.json();
     })
     .then(function (data) {
-      console.log(data);
       var arr = [
         data.list[4],
         data.list[12],
@@ -82,16 +80,11 @@ function getFiveDay(city) {
         data.list[28],
         data.list[36],
       ];
-      console.log(arr);
+
       fiveDay.innerHTML = "5-Day Forecast:";
       arr.forEach((element) => {
-        console.log(element.main.temp + " °F");
-        console.log(element.wind.speed + " MPH");
-        console.log(element.main.humidity + " %");
-        console.log(element.weather[0].icon);
-
         var date = new Date(element.dt_txt).toLocaleDateString();
-        console.log(date);
+
         var icon = element.weather[0].icon;
         var iconUrl = "http://openweathermap.org/img/wn/" + icon + "@2x.png";
         var card = document.createElement("div");
@@ -121,4 +114,14 @@ function saveCity(city) {
   localStorage.setItem("cities", JSON.stringify(cities));
 }
 
+function createBtn() {
+  cities.forEach((element) => {
+    var btn = document.createElement("button");
+    btn.setAttribute("id", "searchHistory");
+    btn.textContent = element;
+    searchHistory.append(btn);
+  });
+}
+
 searchForm.addEventListener("submit", getUserInput);
+searchHistory.addEventListener("click", runWeather);

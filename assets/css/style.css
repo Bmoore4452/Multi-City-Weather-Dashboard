@@ -33,7 +33,7 @@ h2 {
 .search-area {
   display: flex;
   flex-direction: column;
-  /* border: solid; */
+  border: solid;
   width: 20%;
   height: 100%;
   margin: 10px 0;
@@ -85,9 +85,17 @@ h2 {
 }
 
 #citySearch {
-  width: 100%;
+  width: auto;
 }
 
 #card img {
   width: 50%;
+}
+
+#searchHistory{
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  justify-content: center;
+  margin: 5px auto
 }
