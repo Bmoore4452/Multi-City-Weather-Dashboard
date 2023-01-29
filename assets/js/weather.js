@@ -11,6 +11,7 @@ function getUserInput(e) {
 
   var userInput = input.value;
   if (userInput) runWeather(userInput);
+  if (input.value === "") return;
   createBtn();
   input.value = "";
 }
@@ -97,7 +98,9 @@ function getFiveDay(city) {
                           <img src="${iconUrl}" alt="">
                           <div>${"Temp: " + element.main.temp + " °F"}</div>
                           <div>${"Wind: " + element.wind.speed + " MPH"}</div>
-                          <div>${"Humidity: " + element.main.humidity + " %"}</div>
+                          <div>${
+                            "Humidity: " + element.main.humidity + " %"
+                          }</div>
                           
         `;
         fiveDay.append(card);
