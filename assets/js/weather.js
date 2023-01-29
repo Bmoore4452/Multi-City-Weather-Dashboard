@@ -10,7 +10,7 @@ function getUserInput(e) {
   e.preventDefault();
 
   var userInput = input.value;
-  runWeather(userInput);
+  if (userInput) runWeather(userInput);
   createBtn();
   input.value = "";
 }
@@ -41,17 +41,19 @@ function getCurrentWeather(city) {
       };
       currentWeather.innerHTML = "";
 
+      console.log(data);
       var formatted = event.toLocaleDateString(undefined, options);
       var icon = data.weather[0].icon;
       var banner = document.createElement("div");
       var iconUrl = "http://openweathermap.org/img/wn/" + icon + "@2x.png";
       banner.setAttribute("id", "banner");
       banner.innerHTML = `
+                          <div>${data.name}</div>
                           <div>${formatted}</div>
                           <img src="${iconUrl}" alt="">
-                          <div>${data.main.temp + " °F"}</div>
-                          <div>${data.wind.speed + " MPH"}</div>
-                          <div>${data.main.humidity + " %"}</div>
+                          <div>${"Temp: " + data.main.temp + " °F"}</div>
+                          <div>${"Wind: " + data.wind.speed + " MPH"}</div>
+                          <div>${"Humidity: " + data.main.humidity + " %"}</div>
       `;
 
       currentWeather.append(banner);
@@ -93,9 +95,9 @@ function getFiveDay(city) {
         card.innerHTML = `
                           <div>${date}</div>
                           <img src="${iconUrl}" alt="">
-                          <div>${element.main.temp + " °F"}</div>
-                          <div>${element.wind.speed + " MPH"}</div>
-                          <div>${element.main.humidity + " %"}</div>
+                          <div>${"Temp: " + element.main.temp + " °F"}</div>
+                          <div>${"Wind: " + element.wind.speed + " MPH"}</div>
+                          <div>${"Humidity: " + element.main.humidity + " %"}</div>
                           
         `;
         fiveDay.append(card);
@@ -120,8 +122,10 @@ function createBtn() {
     btn.setAttribute("id", "searchHistory");
     btn.textContent = element;
     searchHistory.append(btn);
+    btn.addEventListener("click", function () {
+      runWeather(element);
+    });
   });
 }
 
 searchForm.addEventListener("submit", getUserInput);
-searchHistory.addEventListener("click", runWeather);
